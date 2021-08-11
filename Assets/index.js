@@ -35,7 +35,7 @@ app.get('/createemployee' , (req, res) => {
     });
 });
 
-app.get('/employe1', (req, res) => {
+app.get('/employee1', (req, res) => {
     let post = {first_name: 'John', last_name: 'Doe', title: 'Sales Lead', department:'Sales', Salary: '100000', manager: 'null'}
     let sql = 'INSERT INTO employee SET ?'
     let query = db.query(sql, post, err => {
@@ -45,6 +45,30 @@ app.get('/employe1', (req, res) => {
         res.send('Employee added')
     });
 });
+
+app.get('/getemployee' , (req, res) => {
+    let sql = 'SELECT * FROM employee'
+    let query = db.query(sql, (err, results) => {
+        if(err) {
+            throw err
+        }
+        console.log(results)
+        res.send('Employee details fetched')
+    })
+})
+
+app.get('updateemplyee/:id' , (req, res) => {
+    let newName = 'Updated Name'
+    let sql = `UPDATE employee SET name = '${newName}' WHERE id = ${req.params.id}`
+    let query = db.query(sql, err => {
+        if(err) { 
+            throw err
+        }
+        res.send('Employee updated')
+    })
+
+})
+
 
 app.listen('3000' , () => {
     console.log('Server Started on port 3000')

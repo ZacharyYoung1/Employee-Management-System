@@ -54,11 +54,11 @@ app.get('/getemployee' , (req, res) => {
         }
         console.log(results)
         res.send('Employee details fetched')
-    })
-})
+    });
+});
 
 app.get('updateemplyee/:id' , (req, res) => {
-    let newName = 'Updated Name'
+    let newName = ''
     let sql = `UPDATE employee SET name = '${newName}' WHERE id = ${req.params.id}`
     let query = db.query(sql, err => {
         if(err) { 
@@ -69,7 +69,17 @@ app.get('updateemplyee/:id' , (req, res) => {
 
 })
 
+app.get('/deletedemployee/:id' , (req, res) => {
+    let sql = `DELETE FROM employee WHERE id = ${req.params.id}`
+    let query = db.query(sql, err => {
+        if(err) {
+            throw err
+        }
+        res.send('Employee Deleted')
+    });
+});
+
 
 app.listen('3000' , () => {
     console.log('Server Started on port 3000')
-});
+}); 

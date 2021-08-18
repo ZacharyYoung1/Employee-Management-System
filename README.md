@@ -4,4 +4,4 @@ Used for running smooth operations, this tool is a simplified example of an empl
 # To use :
 Run "npm i" command in terminal to install dependencies
 
-Then run node app.js to initiate application.
+Then run "node app.js" to initiate application.
